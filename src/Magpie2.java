@@ -31,20 +31,58 @@ public class Magpie2
 	public String getResponse(String statement)
 	{
 		String response = "";
-		if (statement.indexOf("no") >= 0)
+        String full = statement.trim();
+        int length = full.length();
+
+        if(length < 1)
+        {
+            response = "Say something, please!";
+        }
+
+		else if (statement.indexOf("no") >= 0)
 		{
 			response = "Why so negative?";
 		}
+
+        else if(statement.indexOf("Ok") >= 0)
+        {
+            response = "Glad you can agree.";
+        }
+
+        else if(statement.indexOf("thats good") >= 0)
+        {
+            response = "Yes, it is good.";
+        }
+
+        else if(statement.indexOf("thats bad") >= 0)
+        {
+            response = "What's bad about it?";
+        }
+
 		else if (statement.indexOf("mother") >= 0
 				|| statement.indexOf("father") >= 0
 				|| statement.indexOf("sister") >= 0
 				|| statement.indexOf("brother") >= 0)
 		{
-			response = "Tell me more about your family.";
+            if(statement.indexOf("mother and father") >= 0)
+            {
+                response = "Tell me more about your parents.";
+            }
+            else
+			    response = "Tell me more about your family.";
 		}
 
         else if(statement.indexOf("dog") >= 0 || statement.indexOf("cat") >= 0)
-            response = "Tell me more about your pets. :)";
+        {
+            if(statement.indexOf("dog") >= 0 && statement.indexOf("cat") >= 0)
+            {
+                response = "I have a cat and a dog!";
+            }
+            else
+            {
+                response = "Tell me more about your pets. :)";
+            }
+        }
 
         else if(statement.indexOf("Mr.") >= 0 || statement.indexOf("Mr ") >= 0)
         {
@@ -69,7 +107,7 @@ public class Magpie2
 	 */
 	private String getRandomResponse()
 	{
-		final int NUMBER_OF_RESPONSES = 4;
+		final int NUMBER_OF_RESPONSES = 6;
 		double r = Math.random();
 		int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
 		String response = "";
@@ -90,6 +128,16 @@ public class Magpie2
 		{
 			response = "You don't say.";
 		}
+
+        else if(whichResponse == 4)
+        {
+            response = "Wow, that's really cool!";
+        }
+
+        else if(whichResponse == 5)
+        {
+            response = "Can you repeat that please? You sounded kinda boring...";
+        }
 
 		return response;
 	}
